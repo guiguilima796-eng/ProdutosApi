@@ -1,10 +1,17 @@
 package com.cursospring.produtosapi.model;
 
-public class Produto {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
+public class Produto {
+    @Id
     private String id;
+
     private String nome;
+
     private String descricao;
+
     private double preco;
 
     public String getDescricao() {
