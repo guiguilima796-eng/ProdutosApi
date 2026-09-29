@@ -4,6 +4,7 @@ import com.cursospring.produtosapi.model.Produto;
 import com.cursospring.produtosapi.repository.ProdutoRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -21,6 +22,7 @@ public class ProdutoController {
         //System.out.println("Produto salvo: " + produto.getNome());
         var id = UUID.randomUUID().toString();
         produto.setId(id);
+        produto.setNome(produto.getNome().trim());
         produtoRepository.save(produto);
         return produto;
     }
@@ -45,6 +47,14 @@ public class ProdutoController {
         produto.setId(id);
         produtoRepository.save(produto);
         return produto;
+    }
+
+    @GetMapping
+    public List<Produto> obterProdutos(@RequestParam(required = false) String nome){
+        if(nome != null){
+            return produtoRepository.findByNome(nome);
+        }
+        return produtoRepository.findAll();
     }
 
 }
