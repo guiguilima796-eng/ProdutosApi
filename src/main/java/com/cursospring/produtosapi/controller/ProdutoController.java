@@ -39,4 +39,12 @@ public class ProdutoController {
         }
     }
 
+    @PutMapping("/{id}")
+    public Produto atualizarProduto(@PathVariable String id, @RequestBody Produto produto){
+//        produtoRepository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        produto.setId(id);
+        produtoRepository.save(produto);
+        return produto;
+    }
+
 }
